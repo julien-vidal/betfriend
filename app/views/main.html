@@ -1,0 +1,32 @@
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">Liste des matchs</h3>
+  </div>
+  <table class="table">
+    <colgroup>
+      <col width="15%">
+      <col width="35%">
+      <col width="5%">
+      <col width="5%">
+      <col width="35%">
+      <col width="5%">
+    </colgroup>
+    <tbody>
+      <tr ng-repeat="match in matchs | orderByPriority | orderBy:'timestamp'">
+        <td class="text-center">{{match.timestamp | date:'dd-MM-yyyy HH:mm'}}</td>
+        <td>{{match.team1}}</td>
+        <td>{{match.score1}}</td>
+        <td>{{match.score2}}</td>
+        <td class="text-right">{{match.team2}}</td>
+        <td class="center">
+          <a ng-href="#bet/{{match.$id}}">
+            <span class="glyphicon glyphicon-plus"></span>
+          </a>
+          <a ng-if="isAdmin" ng-href="#manage-match/{{match.$id}}">
+            <span class="glyphicon glyphicon-edit"></span>
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

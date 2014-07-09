@@ -1,0 +1,108 @@
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css({.tmp,app}) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+    <!-- endbuild -->
+    <link rel="stylesheet" href="styles/bitfriend.css">
+  </head>
+  <body ng-app="betfriendApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    
+    <!-- Add your site or application content here -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-xs-10 col-xs-offset-1">
+          <div class="row">
+            <!-- Header - nav -->
+            <div ng-controller="HeaderMenuCtrl" class="col-xs-12">
+              <div class="header">
+                <ul ng-if="isLogged" class="nav nav-pills pull-right">
+                  <li ng-repeat="link in menuLinks">
+                    <a ng-if="showLink(link)" ng-href="{{link.link}}">{{link.label}}</a>
+                  </li>
+                </ul>
+                <h3 class="text-muted">Betfriend</h3>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12" ng-view="" ng-show="showView"></div>
+          </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <!-- Footer -->
+              <div class="footer">
+                <p><span class="glyphicon glyphicon-heart"></span> build with love by <a href="http://www.julien-vidal.fr">Payou</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/firebase-simple-login/firebase-simple-login.js"></script>
+    <script src="bower_components/angularfire/angularfire.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/conf.js"></script>
+        <script src="scripts/services/auth.js"></script>
+        <script src="scripts/services/user.js"></script>
+        <script src="scripts/services/bet.js"></script>
+        <script src="scripts/services/match.js"></script>
+        <script src="scripts/controllers/login.js"></script>
+        <script src="scripts/controllers/logout.js"></script>
+        <script src="scripts/controllers/register.js"></script>
+        <script src="scripts/controllers/dashboard.js"></script>
+        <script src="scripts/controllers/header-menu.js"></script>
+        <script src="scripts/controllers/manage-match.js"></script>
+        <script src="scripts/controllers/manage-match-edit.js"></script>
+        <script src="scripts/controllers/bet.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

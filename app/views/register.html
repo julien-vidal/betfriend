@@ -1,0 +1,14 @@
+<form ng-submit="register()" class="form-signin" role="form"> 
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div class="alert alert-danger" ng-show="error">{{error}}</div>
+      <h2 class="form-signin-heading">Pour t'inscrire, rempli le formulaire et action !</h2>
+      <input ng-model="user.email" type="email" class="form-control" placeholder="Votre adresse mail" required="" autofocus="">
+      <input ng-model="pseudo" type="pseudo" class="form-control" placeholder="Ton pseudo" required="">
+      <input ng-model="user.password" type="password" class="form-control" placeholder="Votre mot de passe" required="">
+      <button class="btn btn-lg btn-primary col-xs-4 col-xs-offset-4" type="submit">S'inscrire</button>
+    </div>
+  </div>
+</form>    
+
+

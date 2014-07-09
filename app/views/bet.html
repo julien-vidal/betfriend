@@ -1,0 +1,11 @@
+<form ng-submit="create(bet)" class="form-signin" role="form"> 
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div class="alert alert-danger" ng-show="error">{{error}}</div>
+      <h2 class="form-signin-heading text-center">{{match.team1}} VS {{match.team2}}</h2>
+      <input ng-model="bet.score1" type="text" class="form-control" placeholder="Score du {{match.team1}}">
+      <input ng-model="bet.score2" type="text" class="form-control" placeholder="Score du {{match.team2}}">
+      <button class="btn btn-lg btn-primary col-xs-4 col-xs-offset-4" type="submit">Créer ce pari</button>
+    </div>
+  </div>
+</form>   

@@ -1,0 +1,17 @@
+<form ng-submit="create(match)" class="form-signin" role="form"> 
+  <div class="row">
+    <div class="col-xs-10 col-xs-offset-1">
+      <div class="alert alert-danger" ng-show="error">{{error}}</div>
+      <h2 class="form-signin-heading">Creation d'un match</h2>
+      <input ng-model="match.team1" type="text" class="form-control" placeholder="Equipe 1" required="" autofocus="">
+      <input ng-model="match.team2" type="text" class="form-control" placeholder="Equipe 2" required="">
+      <input ng-model="match.date" type="date" class="form-control" required="">
+      <input ng-model="match.time" type="time" class="form-control" required="">
+      <input ng-model="match.score1" type="text" class="form-control" placeholder="Score de l'équipe 1">
+      <input ng-model="match.score2" type="text" class="form-control" placeholder="Score de l'équipe 2"> 
+      <button class="btn btn-lg btn-primary col-xs-4 col-xs-offset-4" type="submit">{{btnLocale}} ce match</button>
+    </div>
+  </div>
+</form>    
+
+
