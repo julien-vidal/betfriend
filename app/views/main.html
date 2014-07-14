@@ -4,12 +4,12 @@
   </div>
   <table class="table">
     <colgroup>
-      <col width="15%">
-      <col width="35%">
+      <col width="20%">
+      <col width="30%">
       <col width="5%">
       <col width="5%">
-      <col width="35%">
-      <col width="5%">
+      <col width="30%">
+      <col width="10%">
     </colgroup>
     <tbody>
       <tr ng-repeat="match in matchs | orderByPriority | orderBy:'timestamp'">
@@ -18,9 +18,9 @@
         <td>{{match.score1}}</td>
         <td>{{match.score2}}</td>
         <td class="text-right">{{match.team2}}</td>
-        <td class="center">
+        <td class="text-right">
           <a ng-href="#bet/{{match.$id}}">
-            <span class="glyphicon glyphicon-plus"></span>
+            <span class="glyphicon glyphicon-{{styleBetIcon(match.hasBet)}}"></span>
           </a>
           <a ng-if="isAdmin" ng-href="#manage-match/{{match.$id}}">
             <span class="glyphicon glyphicon-edit"></span>

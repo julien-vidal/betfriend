@@ -12,3 +12,8 @@ This project need a firebase. After you create a firebase app, create a conf.js 
     angular
     .module('betfriendApp')
     .constant('FIRE_URL', 'url to your firebase');
+
+## Todo
+
+- app :
+    + Find a way to unify promise system unlike create them in each resolve route

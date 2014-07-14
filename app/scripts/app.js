@@ -54,52 +54,67 @@ angular
       templateUrl: 'views/bet.html',
       controller: 'BetCtrl',
       resolve : {
-        match : function($q, $route, Match){
-          var defer = $q.defer();
-          var match = Match.get($route.current.params.matchId);
-          var result = match;
-          if(!Match.isRdy()){
-            match.$on('loaded', function(){
-              match.$off('loaded');
-              Match.setRdy();
-              defer.resolve(match);
-            });
-            result = defer.promise;
-          }
-          return result;
-        },
-        bet : function($q, $rootScope, User, Bet){
+        betAndMatch : function($q, $rootScope, $route, Match, User, Bet){
           // 1/ Get current user, on page loading this information are loaded too late
           var currentUser = function(){
             var defer = $q.defer();
             var currentuser = User.getCurrentUser();
-            var result = currentuser;
             var deregister = null;
-            if(!User.isRdy()){
+            if(!!!currentuser && !User.isRdy()){
               deregister = $rootScope.$on('user.rdy', function(){
                 deregister();
                 User.setRdy();
-                defer.resolve(currentuser);
+                defer.resolve(User.getCurrentUser());
               });
-              result = defer.promise;
             }
-            return result;
+            else{
+              defer.resolve(currentuser);
+            }
+            return defer.promise;
           };
-          // 2/ Try to fetch the user bet
-          return currentUser().then(function(){
+
+          // 0/ We need to fetch match information for bet an eventual user bet load
+          var currentMatch = function(currentUser){
             var defer = $q.defer();
-            var bet = Bet.get(Bet.betKey('matchid', currentUser.uid));
-            var result = bet;
+            var match = Match.get($route.current.params.matchId);
+            if(!Match.isRdy()){
+              match.$on('loaded', function(){
+                match.$off('loaded');
+                Match.setRdy();
+                defer.resolve({match : match, user : currentUser});
+              });
+            }
+            else {
+              defer.resolve({match : match, user : currentUser});
+            }
+            return defer.promise;
+          };
+
+
+          // 2/ Try to fetch the user bet
+          var bet = function(matchAndUser){
+            var defer = $q.defer();
+            var bet = Bet.get(Bet.betKey(matchAndUser.match.$id, matchAndUser.user.uid));
             if(bet && !Bet.isRdy()){
               bet.$on('loaded', function(){
                 bet.$off('loaded');
                 Bet.setRdy();
-                defer.resolve(bet);
+                defer.resolve({bet : bet, match : matchAndUser.match});
               });
-              result = defer.promise;
             }
-            return result;
-          });
+            else{
+              defer.resolve({bet : bet, match : matchAndUser.match});
+            }
+            return defer.promise;
+          };
+          
+          // 3/ Launch that ugly promise chain !
+          return currentUser()
+            .then(currentMatch)
+            .then(bet)
+            .then(function(betAndMatch){
+              return betAndMatch;
+            });
         }
       }
     })

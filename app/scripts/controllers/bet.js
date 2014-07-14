@@ -2,11 +2,14 @@
 
 angular
 .module('betfriendApp')
-.controller('BetCtrl', function ($scope, $timeout, Bet, bet, match) {
-	$scope.bet = {};
-	$scope.match = match;
-	$scope.create = Bet.create;
-	console.log('-- Bet Ctrl --');
-	console.dir(bet);
-	console.dir(match);
+.controller('BetCtrl', function ($scope, $location, Bet, HOME_ROUTE, betAndMatch) {
+	$scope.bet = betAndMatch.bet;
+	$scope.match = betAndMatch.match;
+	$scope.create =  function(bet, match){
+		Bet
+			.create(bet, match)
+			.then(function(){
+				$location.path(HOME_ROUTE);
+			});
+	};
 });

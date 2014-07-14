@@ -1,6 +1,5 @@
 'use strict';
 
-// @current : create normal user and check if match not here
 angular
 .module('betfriendApp')
 .controller('HeaderMenuCtrl', function ($rootScope, $scope, User) {

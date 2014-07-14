@@ -1,5 +1,4 @@
 'use strict';
-// @current : Finir bet implementation (tpl / logique / model)
 angular
 .module('betfriendApp')
 .factory('Bet', function($firebase, User, FIRE_URL){
@@ -8,11 +7,12 @@ angular
 	var fireRdy = false;
 	var Bet = {
 		create : function(bet, match){
-			var betWrapper = {};
+			var betId = null;
 			bet.mid = match.$id;
 			bet.uid = User.getCurrentUser().uid;
-			betWrapper[Bet.betKey(bet.mid,bet.uid)] = bet;
-			return bets.$add(betWrapper);
+			betId = Bet.betKey(bet.mid,bet.uid);
+			bets[betId] = bet;
+			return bets.$save(betId);
 		},
 		edit : function(betId, bet){
 			bets[betId] = bet;
