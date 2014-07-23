@@ -32,6 +32,9 @@ angular
 		getCurrentUser : function(){
 			return currentUser;
 		},
+		getAll : function(){
+			return users;
+		},
 		findUserByUid : function(uid){
 			var deferred = $q.defer();
 			var user = (uid)? users.$child(uid) : undefined;
